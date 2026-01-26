@@ -1,0 +1,104 @@
+body {
+    margin: 0;
+    background: radial-gradient(circle at top, #0a0a0a, #000);
+    font-family: 'Segoe UI', sans-serif;
+    color: #00f6ff;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 20px;
+    text-shadow: 0 0 20px #00f6ff;
+}
+
+.queue-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+    perspective: 1200px;
+}
+
+/* ===== 3D Cube ===== */
+.box {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    margin: 20px;
+    transform-style: preserve-3d;
+    animation: slideIn 0.6s ease;
+    transition: transform 0.4s ease;
+}
+
+/* Hover animation */
+.box:hover {
+    transform: rotateX(20deg) rotateY(0deg) translateY(0px);
+    cursor: pointer;
+}
+
+
+
+/* Front Face */
+.box::before {
+    content: attr(data-value);
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(145deg, #00f6ff, #005eff);
+    box-shadow: 0 0 25px #00f6ff, inset 0 0 15px black;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+    transform: translateZ(45px);
+    transition: all 0.4s ease;
+}
+
+/* Glow & pop on hover */
+.box:hover::before {
+    box-shadow: 0 0 40px #00f6ff, inset 0 0 25px black;
+    transform: translateY(-10px) scale(1.05);
+}
+
+
+/* Animations */
+@keyframes float {
+    0%   { transform: rotateX(-25deg) rotateY(30deg) translateY(0px); }
+    50%  { transform: rotateX(-22deg) rotateY(32deg) translateY(-5px); }
+    100% { transform: rotateX(-25deg) rotateY(30deg) translateY(0px); }
+}
+
+/* Controls */
+.controls {
+    margin-top: 40px;
+}
+
+input {
+    padding: 10px;
+    width: 150px;
+    border-radius: 5px;
+    border: none;
+}
+
+button {
+    padding: 10px 20px;
+    background: #00f6ff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+button:hover {
+    box-shadow: 0 0 15px #00f6ff;
+}
+
+#status {
+    margin-top: 20px;
+    font-size: 18px;
+    text-shadow: 0 0 10px #00f6ff;
+}
