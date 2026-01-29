@@ -14,60 +14,66 @@ h1 {
 .queue-container {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 80px;
     perspective: 1200px;
+    flex-wrap: wrap;
 }
 
-/* ===== 3D Cube ===== */
+/* ===== Circular Queue Node ===== */
 .box {
     position: relative;
     width: 90px;
     height: 90px;
     margin: 20px;
-    transform-style: preserve-3d;
-    animation: slideIn 0.6s ease;
-    transition: transform 0.4s ease;
-}
-
-/* Hover animation */
-.box:hover {
-    transform: rotateX(20deg) rotateY(0deg) translateY(0px);
-    cursor: pointer;
-}
-
-
-
-/* Front Face */
-.box::before {
-    content: attr(data-value);
-    position: absolute;
-    width: 90px;
-    height: 90px;
-    background: linear-gradient(145deg, #00f6ff, #005eff);
-    box-shadow: 0 0 25px #00f6ff, inset 0 0 15px black;
-    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 28px;
+    font-size: 26px;
     font-weight: bold;
     color: black;
-    transform: translateZ(45px);
-    transition: all 0.4s ease;
+    background: radial-gradient(circle at 30% 30%, #00f6ff, #005eff);
+    border-radius: 50%;
+    box-shadow: 0 0 25px #00f6ff, inset 0 0 15px black;
+    animation: popIn 0.5s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Glow & pop on hover */
-.box:hover::before {
+/* Hover glow */
+.box:hover {
+    transform: scale(1.1);
     box-shadow: 0 0 40px #00f6ff, inset 0 0 25px black;
-    transform: translateY(-10px) scale(1.05);
+    cursor: pointer;
 }
 
+/* ===== Connector Line ===== */
+.box::after {
+    content: "";
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    width: 40px;
+    height: 4px;
+    background: #00f6ff;
+    transform: translateY(-50%);
+    box-shadow: 0 0 10px #00f6ff;
+}
 
-/* Animations */
-@keyframes float {
-    0%   { transform: rotateX(-25deg) rotateY(30deg) translateY(0px); }
-    50%  { transform: rotateX(-22deg) rotateY(32deg) translateY(-5px); }
-    100% { transform: rotateX(-25deg) rotateY(30deg) translateY(0px); }
+/* Remove connector from last node */
+.box:last-child::after {
+    display: none;
+}
+
+/* Animation */
+@keyframes popIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 /* Controls */
