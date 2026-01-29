@@ -8,7 +8,7 @@ function displayQueue() {
     queue.forEach(value => {
         let box = document.createElement("div");
         box.className = "box";
-        box.setAttribute("data-value", value);
+        box.innerText = value;
         q.appendChild(box);
     });
 }
@@ -16,15 +16,16 @@ function displayQueue() {
 function enqueue() {
     let val = document.getElementById("value").value;
 
+    if (val === "") return;
+
     if (queue.length == maxSize) {
-        document.getElementById("status").innerText = "Queue Overflow";
+        document.getElementById("status").innerText = "⚠ Queue Overflow";
         return;
     }
 
-    if (val === "") return;
-
     queue.push(val);
     document.getElementById("status").innerText = "Inserted " + val;
+    document.getElementById("value").value = "";
     displayQueue();
 }
 
